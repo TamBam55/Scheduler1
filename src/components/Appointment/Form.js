@@ -6,24 +6,21 @@ export default function Form(props) {
 
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [error, setError] = useState("");
 
   const reset = () => {
-    setStudent("")
+    setStudent ("")
     setInterviewer(null)
-  };
+  }
 
-  function cancel () {
+  const cancel = () => {
     reset();
-    props.onCancel()
-  };
-
+    props.onCancel();
+  }
 
   return (
   <main className="appointment__card appointment__card--create">
   <section className="appointment__card-left">
-    
-    <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
+    <form autoComplete="off">
       <input
         className="appointment__create-input text--semi-bold"
         name={props.student}
@@ -31,16 +28,13 @@ export default function Form(props) {
         placeholder="Enter Student Name"
         onChange={(event) => setStudent(event.target.value)}
         value={student}
-        data-testid="student-name-input"
       />
     </form>
-
     <InterviewerList 
       interviewers={props.interviewers}
       value={interviewer}
       onChange={(event) => setInterviewer(event)}
     />
-
   </section>
   <section className="appointment__card-right">
     <section className="appointment__actions">

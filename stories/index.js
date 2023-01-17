@@ -153,7 +153,7 @@ storiesOf("InterviewerList", module)
     .add('Empty', () => ( <Empty onAdd={action('onAdd')} /> ))
     .add('Show', () => ( 
       <Show 
-        student="Lydia Miller-Jones"
+        student="Maria Miller-Jones"
         interviewer={interviewer}
         onEdit={action('onEdit')}
         onDelete={action('onDelete')}
@@ -179,8 +179,8 @@ storiesOf("InterviewerList", module)
     ))
     .add('Form-Edit', () => (
       <Form
-      student="Tammy"
-      value={3}
+      student="Tammy Plamondon"
+      interviewer={3}
       interviewers={interviewers}
       onSave={action('onSave')}
       onCancel={action('onCancel')}

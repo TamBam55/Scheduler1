@@ -1,61 +1,80 @@
-import React, { useState } from "react";
-
-import DayList from "./DayList";
-import InterviewerList from "./InterviewerList";
-import Appointment from "components/Appointment";
-
+import React, {useState} from "react";
 import "components/Application.scss";
 
-const appointments = [
+import DayList from "./DayList";
+import Appointment from "components/Appointment"
+
+const days = [
   {
+    id: 1,
+    name: "Monday",
+    spots: 2,
+  },
+  {
+    id: 2,
+    name: "Tuesday",
+    spots: 5,
+  },
+  {
+    id: 3,
+    name: "Wednesday",
+    spots: 0,
+  },
+];
+
+const appointments = {
+  1: {
     id: 1,
     time: "12pm",
   },
-  {
+  2: {
     id: 2,
     time: "1pm",
     interview: {
       student: "Lydia Miller-Jones",
       interviewer: {
-        id: 1,
+        id: 3,
         name: "Sylvia Palmer",
         avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
+      },
+    },
   },
-  {
+  3: {
     id: 3,
     time: "2pm",
   },
-  {
+  4: {
     id: 4,
     time: "3pm",
     interview: {
-      student: "Xanthadar Brillimazig",
+      student: "Archie Andrews",
       interviewer: {
-        id: 1,
-        name: "Guppy Guilderson",
-        avatar: "https://i.imgur.com/twYrpay.jpg",
-      }
-    }
+        id: 4,
+        name: "Cohana Roy",
+        avatar: "https://i.imgur.com/FK8V841.jpg",
+      },
+    },
   },
-  {
+  5: {
     id: 5,
     time: "4pm",
-    interview: {
-      student: "Alice Liddell",
-      interviewer: {
-        id: 1,
-        name: "Fran Drescher",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  }
-];
+  },
+};
 
 export default function Application(props) {
-  const [getDay, setDay] = useState("Monday");
-  const [value, onChange] = useState(1)
+
+  const [day, setDay] = useState("Monday");
+  
+  const appointmentList = Object.values(appointments).map(appointment => {
+
+    return (
+      <Appointment
+        key={ appointment.id }
+        { ...appointment }
+      />
+    );
+
+  }) 
 
   return (
     <main className="layout">
@@ -67,7 +86,11 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} setDay={setDay} />
+          <DayList 
+             days={ days }
+             value={ day }
+             onChange={ setDay }
+           />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -76,7 +99,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {dailyAppointments}
+        { appointmentList }
         <Appointment key="last" time="5pm" />
       </section>
     </main>
